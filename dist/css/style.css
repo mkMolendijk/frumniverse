@@ -3,7 +3,7 @@ body {
     font-size:20px;
     overflow:hidden;
     margin:0px; padding:0px;
-    /*background-color:#ccc;*/
+    background-color:#ccc;
 }
 
 body * {
@@ -14,14 +14,17 @@ body * {
     background-repeat: no-repeat;
 }
 
-dog {
-    background: #f00;
-}
-
 ghost {
     background: #0f0;
     width: 100px;
     height: 100px;
+}
+
+dog {
+    background-image: url("../images/frum.png");
+    background-size: cover;
+    width: 80px;
+    height: 72px;
 }
 
 level {
@@ -30,5 +33,6 @@ level {
 }
 
 #level1 {
-    background: #000;
+    background-image: url("../images/level1.jpg");
+    background-size: cover;
 }
