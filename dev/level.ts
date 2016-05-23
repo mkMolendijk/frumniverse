@@ -1,0 +1,8 @@
+/**
+ * level
+ */
+class level {
+    constructor() {
+        
+    }
+}
