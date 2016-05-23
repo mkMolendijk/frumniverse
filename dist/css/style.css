@@ -6,14 +6,10 @@ body {
     background-color:#ccc;
 }
 
-message {
-    position: absolute;
-    display: block;
-    margin:0px; padding:0px;
-    box-sizing: border-box;
-    background-repeat: no-repeat;
-    background-color:white;
-    line-height: 1.8;
-    padding:10px;
-    border-radius: 8px;
+dog {
+    
+}
+
+ghost {
+    
 }

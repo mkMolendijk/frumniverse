@@ -1,4 +1,3 @@
-/// <reference path="message.ts"/>
 
 class Main {
     constructor() {
