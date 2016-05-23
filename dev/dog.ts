@@ -1,7 +1,7 @@
 /**
  * dog
  */
-class dog {
+class Dog {
     
     private divDog : HTMLElement;
     

@@ -1,12 +1,17 @@
 /**
  * level
  */
-class level {
+class Level {
     
-    private background;
+    private div;
     private platform : HTMLElement;
+    private ghost : Ghost;
     
-    constructor() {
+    constructor(stage : number) {
+        this.div = document.createElement("level");
+        this.div.id = stage;
+        document.body.appendChild(this.div);
         
+        this.ghost = new Ghost();
     }
 }
