@@ -3,7 +3,7 @@ body {
     font-size:20px;
     overflow:hidden;
     margin:0px; padding:0px;
-    background-color:#ccc;
+    /*background-color:#ccc;*/
 }
 
 body * {
@@ -29,6 +29,6 @@ level {
     height: 100%;
 }
 
-#1 {
+#level1 {
     background: #000;
 }
