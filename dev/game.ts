@@ -1,7 +1,7 @@
 /**
- * Game
+ * game
  */
-class Game {
+class game {
     constructor() {
         
     }
