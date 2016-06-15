@@ -172,4 +172,39 @@ var Item = (function () {
 window.addEventListener("load", function () {
     new Game();
 });
+var LevelFive = (function (_super) {
+    __extends(LevelFive, _super);
+    function LevelFive(stage) {
+        _super.call(this, stage);
+    }
+    return LevelFive;
+}(Level));
+var LevelFour = (function (_super) {
+    __extends(LevelFour, _super);
+    function LevelFour(stage) {
+        _super.call(this, stage);
+    }
+    return LevelFour;
+}(Level));
+var LevelOne = (function (_super) {
+    __extends(LevelOne, _super);
+    function LevelOne(stage) {
+        _super.call(this, stage);
+    }
+    return LevelOne;
+}(Level));
+var LevelThree = (function (_super) {
+    __extends(LevelThree, _super);
+    function LevelThree(stage) {
+        _super.call(this, stage);
+    }
+    return LevelThree;
+}(Level));
+var LevelTwo = (function (_super) {
+    __extends(LevelTwo, _super);
+    function LevelTwo(stage) {
+        _super.call(this, stage);
+    }
+    return LevelTwo;
+}(Level));
 //# sourceMappingURL=main.js.map
