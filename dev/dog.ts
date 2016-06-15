@@ -13,7 +13,7 @@ class Dog extends Character {
     
     constructor() {
         super();
-        
+
         this.divDog = document.createElement("dog");
         document.body.appendChild(this.divDog);
         
@@ -75,7 +75,6 @@ class Dog extends Character {
         } else {
             this.posY += this.speedY;
         }
->>>>>>> 4372aeb3bacf3977848463e4522a007855ae291e
         
         this.divDog.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     }
