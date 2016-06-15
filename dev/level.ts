@@ -1,5 +1,6 @@
 /**
  * Level
+ * Parent class for all levels
  */
 class Level {
     

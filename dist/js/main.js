@@ -164,6 +164,11 @@ var Game = (function () {
     };
     return Game;
 }());
+var Item = (function () {
+    function Item() {
+    }
+    return Item;
+}());
 window.addEventListener("load", function () {
     new Game();
 });
