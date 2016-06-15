@@ -21,10 +21,9 @@ ghost {
 }
 
 dog {
-    background-image: url("../images/frum.png");
-    background-size: cover;
     width: 80px;
-    height: 72px;
+    height: 73px;
+    background: url("../images/Characters-items-sprite.png") no-repeat -149px 0;
 }
 
 level {
@@ -33,6 +32,6 @@ level {
 }
 
 #level1 {
-    background-image: url("../images/level1.jpg");
+    background-image: url("../images/L1-bg.png");
     background-size: cover;
 }

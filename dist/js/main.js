@@ -84,6 +84,18 @@ var Level = (function () {
     }
     return Level;
 }());
+var Game = (function () {
+    function Game() {
+        this.level = new Level(1);
+        this.dog = new Dog();
+        requestAnimationFrame(this.gameLoop.bind(this));
+    }
+    Game.prototype.gameLoop = function () {
+        this.dog.move();
+        requestAnimationFrame(this.gameLoop.bind(this));
+    };
+    return Game;
+}());
 var Ghost = (function (_super) {
     __extends(Ghost, _super);
     function Ghost() {
@@ -152,18 +164,6 @@ var Ghost = (function (_super) {
     };
     return Ghost;
 }(Character));
-var Game = (function () {
-    function Game() {
-        this.level = new Level(1);
-        this.dog = new Dog();
-        requestAnimationFrame(this.gameLoop.bind(this));
-    }
-    Game.prototype.gameLoop = function () {
-        this.dog.move();
-        requestAnimationFrame(this.gameLoop.bind(this));
-    };
-    return Game;
-}());
 var Item = (function () {
     function Item() {
     }

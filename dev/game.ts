@@ -1,5 +1,4 @@
 /// <reference path="level.ts" />
-/// <reference path="ghost.ts" />
 
 /**
  * Game
@@ -17,7 +16,7 @@ class Game {
     
     private gameLoop() {
         this.dog.move();
-        
+
         requestAnimationFrame(this.gameLoop.bind(this));
     }
 }
