@@ -1,5 +1,5 @@
 /**
- * level
+ * Level
  */
 class Level {
     

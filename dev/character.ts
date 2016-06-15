@@ -1,0 +1,8 @@
+/**
+ * Character
+ */
+class Character {
+    constructor() {
+        
+    }
+}

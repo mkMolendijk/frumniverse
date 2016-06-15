@@ -1,19 +1,22 @@
+/// <reference path="level.ts" />
+/// <reference path="ghost.ts" />
+
 /**
- * game
+ * Game
  */
 class Game {
     private level : Level;
-    private ghost : Ghost;
+    private dog : Dog;
     
     constructor() {
         this.level = new Level(1);
-        this.ghost = new Ghost();
+        this.dog = new Dog();
         
         requestAnimationFrame(this.gameLoop.bind(this));
     }
     
     private gameLoop() {
-        this.ghost.move();
+        this.dog.move();
         
         requestAnimationFrame(this.gameLoop.bind(this));
     }

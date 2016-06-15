@@ -1,5 +1,5 @@
 /**
- * ghost
+ * Ghost
  */
 class Ghost extends Character {
     

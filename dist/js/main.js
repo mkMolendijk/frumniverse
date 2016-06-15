@@ -1,22 +1,35 @@
-var Dog = (function () {
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Character = (function () {
+    function Character() {
+    }
+    return Character;
+}());
+var Dog = (function (_super) {
+    __extends(Dog, _super);
     function Dog() {
+        _super.call(this);
+        this.speedX = 0;
+        this.speedY = 0;
+        this.divDog.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     }
     return Dog;
-}());
-var Game = (function () {
-    function Game() {
-        this.level = new Level(1);
-        this.ghost = new Ghost();
-        requestAnimationFrame(this.gameLoop.bind(this));
+}(Character));
+var Level = (function () {
+    function Level(stage) {
+        this.div = document.createElement("level");
+        this.div.id = "level" + stage;
+        document.body.appendChild(this.div);
     }
-    Game.prototype.gameLoop = function () {
-        this.ghost.move();
-        requestAnimationFrame(this.gameLoop.bind(this));
-    };
-    return Game;
+    return Level;
 }());
-var Ghost = (function () {
+var Ghost = (function (_super) {
+    __extends(Ghost, _super);
     function Ghost() {
+        _super.call(this);
         this.speedX = 0;
         this.speedY = 0;
         this.divGhost = document.createElement("ghost");
@@ -80,14 +93,18 @@ var Ghost = (function () {
         this.divGhost.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     };
     return Ghost;
-}());
-var Level = (function () {
-    function Level(stage) {
-        this.div = document.createElement("level");
-        this.div.id = "level" + stage;
-        document.body.appendChild(this.div);
+}(Character));
+var Game = (function () {
+    function Game() {
+        this.level = new Level(1);
+        this.dog = new Dog();
+        requestAnimationFrame(this.gameLoop.bind(this));
     }
-    return Level;
+    Game.prototype.gameLoop = function () {
+        this.dog.move();
+        requestAnimationFrame(this.gameLoop.bind(this));
+    };
+    return Game;
 }());
 window.addEventListener("load", function () {
     new Game();
