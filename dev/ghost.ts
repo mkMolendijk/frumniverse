@@ -1,7 +1,7 @@
 /**
  * ghost
  */
-class Ghost {
+class Ghost extends Character {
     
     private divGhost : HTMLElement;
     
@@ -12,6 +12,7 @@ class Ghost {
     private speedY : number = 0;
     
     constructor() {
+        super();
         this.divGhost = document.createElement("ghost");
         document.body.appendChild(this.divGhost);
         
