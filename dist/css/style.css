@@ -36,3 +36,24 @@ level {
     background-image: url("../images/L1-bg.png");
     background-size: cover;
 }
+
+#level2 {
+    background-image: url("../images/L2-bg.png");
+    background-size: cover;
+}
+
+#level3 {
+    background-image: url("../images/L3-bg.png");
+    background-size: cover;
+}
+
+#level4 {
+    background-image: url("../images/L4-bg.png");
+    background-size: cover;
+}
+
+#level5 {
+    background-image: url("../images/L5-bg.png");
+    background-size: cover;
+}
+
