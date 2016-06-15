@@ -12,9 +12,8 @@ class Dog extends Character {
     private speedY : number = 0;
     
     constructor() {
-<<<<<<< HEAD
         super();
-=======
+        
         this.divDog = document.createElement("dog");
         document.body.appendChild(this.divDog);
         
