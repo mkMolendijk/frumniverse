@@ -11,10 +11,8 @@ class Ghost extends Character {
     private speedX : number = 0;
     private speedY : number = 0;
     
-    constructor() {
-        super();
-        this.divGhost = document.createElement("ghost");
-        document.body.appendChild(this.divGhost);
+    constructor(l: Level) {
+        super(l, "ghost");
         
         this.posX = Math.random() * (window.innerWidth - 100);
         this.posY = Math.random() * (window.innerHeight - 100);

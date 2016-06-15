@@ -4,18 +4,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Character = (function () {
-    function Character() {
+    function Character(l, tagName) {
+        this.level = l;
+        this.div = document.createElement(tagName);
+        this.level.div.appendChild(this.div);
     }
     return Character;
 }());
 var Dog = (function (_super) {
     __extends(Dog, _super);
-    function Dog() {
-        _super.call(this);
+    function Dog(l) {
+        _super.call(this, l, "dog");
         this.speedX = 0;
         this.speedY = 0;
-        this.divDog = document.createElement("dog");
-        document.body.appendChild(this.divDog);
         this.posX = Math.random() * (window.innerWidth - 100);
         this.posY = Math.random() * (window.innerHeight - 100);
         window.addEventListener("keydown", this.onKeyDown.bind(this));
@@ -72,7 +73,7 @@ var Dog = (function (_super) {
         else {
             this.posY += this.speedY;
         }
-        this.divDog.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
+        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     };
     return Dog;
 }(Character));
@@ -81,29 +82,30 @@ var Level = (function () {
         this.div = document.createElement("level");
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
+        this.dog = new Dog(this);
     }
+    Level.prototype.update = function () {
+        this.dog.move();
+    };
     return Level;
 }());
 var Game = (function () {
     function Game() {
         this.level = new Level(1);
-        this.dog = new Dog();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
     Game.prototype.gameLoop = function () {
-        this.dog.move();
+        this.level.update();
         requestAnimationFrame(this.gameLoop.bind(this));
     };
     return Game;
 }());
 var Ghost = (function (_super) {
     __extends(Ghost, _super);
-    function Ghost() {
-        _super.call(this);
+    function Ghost(l) {
+        _super.call(this, l, "ghost");
         this.speedX = 0;
         this.speedY = 0;
-        this.divGhost = document.createElement("ghost");
-        document.body.appendChild(this.divGhost);
         this.posX = Math.random() * (window.innerWidth - 100);
         this.posY = Math.random() * (window.innerHeight - 100);
         window.addEventListener("keydown", this.onKeyDown.bind(this));

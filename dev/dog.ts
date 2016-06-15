@@ -3,20 +3,15 @@
  */
 class Dog extends Character {
     
-    private divDog : HTMLElement;
-    
     private posX : number;
     private posY : number;
     
     private speedX : number = 0;
     private speedY : number = 0;
     
-    constructor() {
-        super();
+    constructor(l: Level) {
+        super(l, "dog");
 
-        this.divDog = document.createElement("dog");
-        document.body.appendChild(this.divDog);
-        
         this.posX = Math.random() * (window.innerWidth - 100);
         this.posY = Math.random() * (window.innerHeight - 100);
         
@@ -76,6 +71,6 @@ class Dog extends Character {
             this.posY += this.speedY;
         }
         
-        this.divDog.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
+        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     }
 }
