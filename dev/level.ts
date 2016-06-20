@@ -10,17 +10,34 @@
 class Level {
     
     public div: HTMLElement;
+    public scoreDiv: HTMLElement;
+    public goldBones: HTMLElement;
     public platform: any;
     protected dog: Dog;
-    public enemyNames: Array<string>;
-    protected enemies: Array<Enemy>;
+
     protected lettersTyped: string = "";
+
+    public enemyNames: Array<string>;
+    protected enemies: Array<Enemy>;    
     protected enemySize: number;
+    protected bonesCount: number;
+    protected goldBonesCount: number;
     
     constructor(stage : number) {
         this.div = document.createElement("level");
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
+
+        this.scoreDiv = document.createElement("bones");
+        document.body.appendChild(this.scoreDiv);
+        this.bonesCount = 0;
+        this.scoreDiv.innerHTML = "" + this.bonesCount;
+
+        this.goldBones = document.createElement("gold-bones");
+        document.body.appendChild(this.goldBones);
+        this.goldBonesCount = 0;
+        this.goldBones.innerHTML = "" + this.goldBonesCount;
+
 
         this.enemies = new Array();
 
@@ -114,7 +131,12 @@ class Level {
         if (this.lettersTyped.length == this.enemySize) {
             for (let i = 0; i < this.enemies.length; i++) {
                 if (this.lettersTyped == this.enemies[i].name) {
+                    this.bonesCount++;
+                    this.scoreDiv.innerHTML = "" + this.bonesCount;
                     this.enemies[i].remove();
+                    if (this.bonesCount == 10) {
+                        this.goldBonesCount++;
+                    }
                 }
             }
 

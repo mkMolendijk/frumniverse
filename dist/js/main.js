@@ -26,14 +26,14 @@ var Enemy = (function (_super) {
     __extends(Enemy, _super);
     function Enemy(l) {
         _super.call(this, l, "enemy");
-        var random = Math.round(Math.random() * 25);
+        var random = Math.round(Math.random() * 24);
         this.name = l.enemyNames[random];
         this.div.innerHTML = this.name;
         this.width = 128;
         this.height = 99;
         this.posX = -this.width;
-        this.posY = Math.random() * (window.innerWidth / 2 - this.height);
-        this.speed = Math.round(Math.random() * 4);
+        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 60;
+        this.speed = Math.round(Math.random() * 3 + 1);
     }
     Enemy.prototype.remove = function () {
         this.div.remove();
@@ -53,6 +53,14 @@ var Level = (function () {
         this.div = document.createElement("level");
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
+        this.scoreDiv = document.createElement("bones");
+        document.body.appendChild(this.scoreDiv);
+        this.bonesCount = 0;
+        this.scoreDiv.innerHTML = "" + this.bonesCount;
+        this.goldBones = document.createElement("gold-bones");
+        document.body.appendChild(this.goldBones);
+        this.goldBonesCount = 0;
+        this.goldBones.innerHTML = "" + this.goldBonesCount;
         this.enemies = new Array();
         window.addEventListener("keydown", this.onKeyDown.bind(this));
     }
@@ -142,7 +150,12 @@ var Level = (function () {
         if (this.lettersTyped.length == this.enemySize) {
             for (var i = 0; i < this.enemies.length; i++) {
                 if (this.lettersTyped == this.enemies[i].name) {
+                    this.bonesCount++;
+                    this.scoreDiv.innerHTML = "" + this.bonesCount;
                     this.enemies[i].remove();
+                    if (this.bonesCount == 10) {
+                        this.goldBonesCount++;
+                    }
                 }
             }
             this.lettersTyped = "";
@@ -222,8 +235,11 @@ var LevelOne = (function (_super) {
         this.enemySize = 3;
         this.platform.draw();
         this.dog = new Dog(this, this.platform);
-        this.enemies.push(new Enemy(this));
+        this.timer = setInterval(this.createEnemy.bind(this), 2000);
     }
+    LevelOne.prototype.createEnemy = function () {
+        this.enemies.push(new Enemy(this));
+    };
     return LevelOne;
 }(Level));
 var Game = (function () {

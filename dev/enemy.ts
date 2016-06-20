@@ -14,7 +14,7 @@ class Enemy extends Character {
     constructor(l: Level) {
         super(l, "enemy");
 
-        let random = Math.round(Math.random() * 25);
+        let random = Math.round(Math.random() * 24);
         this.name = l.enemyNames[random];
         this.div.innerHTML = this.name;
 
@@ -22,8 +22,8 @@ class Enemy extends Character {
         this.height = 99;
 
         this.posX = -this.width;
-        this.posY = Math.random() * (window.innerWidth / 2 - this.height);
-        this.speed = Math.round(Math.random() * 4);
+        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 60;
+        this.speed = Math.round(Math.random() * 3 +1);
     }
 
     public remove():void {
