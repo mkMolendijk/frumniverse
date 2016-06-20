@@ -1,3 +1,8 @@
+/// <reference path="level.ts" />
+/// <reference path="platform.ts" />
+/// <reference path="character.ts" />
+
+
 /**
  * Dog
  */
@@ -5,15 +10,24 @@ class Dog extends Character {
     
     private posX : number;
     private posY : number;
+    private width : number;
+    private height: number;
     
     private speedX : number = 0;
     private speedY : number = 0;
+    private scale : number = 1;
+
+    private platform : any;
     
-    constructor(l: Level) {
+    constructor(l: Level, p: any) {
         super(l, "dog");
 
-        this.posX = Math.random() * (window.innerWidth - 100);
-        this.posY = Math.random() * (window.innerHeight - 100);
+        this.platform = p;
+
+        this.width = 66;
+        this.height = 59;
+        this.posX = this.platform.posX + this.platform.width / 2 - this.width / 2;
+        this.posY = this.platform.posY - this.height + 10;
         
         //Add keyboard listeners
         window.addEventListener("keydown", this.onKeyDown.bind(this));
@@ -24,15 +38,11 @@ class Dog extends Character {
         switch(event.keyCode) {
             case 37:
                 this.speedX = -5;
-                break;
-            case 38:
-                this.speedY = -5;
+                this.scale = -1;
                 break;
             case 39:
                 this.speedX = 5;
-                break;
-            case 40:
-                this.speedY = 5;
+                this.scale = 1;
                 break;
         }
     }
@@ -42,35 +52,21 @@ class Dog extends Character {
             case 37:
                 this.speedX = 0;
                 break;
-            case 38:
-                this.speedY = 0;
-                break;
             case 39:
                 this.speedX = 0;
-                break;
-            case 40:
-                this.speedY = 0;
                 break;
         }
     }
     
     public move() : void {
-        if (this.posX + this.speedX < 0) {
-            this.posX = 0;
-        } else if (this.posX + this.speedX > window.innerWidth - 100) {
-            this.posX = window.innerWidth - 100;
+        if (this.posX + this.speedX < this.platform.posX) {
+            this.posX = this.platform.posX;
+        } else if (this.posX + this.speedX > this.platform.posX + this.platform.width - this.width) {
+            this.posX = this.platform.posX + this.platform.width - this.width;
         } else {
             this.posX += this.speedX;
-        }
+        }        
         
-        if (this.posY + this.speedY < 0) {
-            this.posY = 0;
-        } else if (this.posY + this.speedY > window.innerHeight - 100) {
-            this.posY = window.innerHeight - 100;
-        } else {
-            this.posY += this.speedY;
-        }
-        
-        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
+        this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px) scaleX(" + this.scale + ")";
     }
 }

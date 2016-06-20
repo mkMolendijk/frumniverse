@@ -21,10 +21,16 @@ ghost {
 }
 
 dog {
-    width: 169px;
+    width: 66px;
     height: 59px;
-    background: url("../images/Characters-items-sprite.png") no-repeat -57px 0;
-    background-size: 75% auto;
+    background: url("../images/frum.png") no-repeat;
+    background-size: 100% auto;
+}
+
+platform1 {
+    width: 516px;
+    height: 338px;
+    background: url("../images/L1-sprite.png") no-repeat -2px -2px;
 }
 
 level {
@@ -55,5 +61,12 @@ level {
 #level5 {
     background-image: url("../images/L5-bg.png");
     background-size: cover;
+}
+
+#level1 enemy {
+    background-image: url("../images/L1-alien.png");
+    width: 128px;
+    height: 99px;
+    text-align: center;
 }
 
