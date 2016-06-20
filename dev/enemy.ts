@@ -22,7 +22,7 @@ class Enemy extends Character {
         this.height = 99;
 
         this.posX = -this.width;
-        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 60;
+        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 50;
         this.speed = Math.round(Math.random() * 3 +1);
     }
 

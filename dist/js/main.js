@@ -32,7 +32,7 @@ var Enemy = (function (_super) {
         this.width = 128;
         this.height = 99;
         this.posX = -this.width;
-        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 60;
+        this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 50;
         this.speed = Math.round(Math.random() * 3 + 1);
     }
     Enemy.prototype.remove = function () {
@@ -53,12 +53,14 @@ var Level = (function () {
         this.div = document.createElement("level");
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
+        this.header = document.createElement("header");
+        document.body.appendChild(this.header);
         this.scoreDiv = document.createElement("bones");
-        document.body.appendChild(this.scoreDiv);
+        this.header.appendChild(this.scoreDiv);
         this.bonesCount = 0;
         this.scoreDiv.innerHTML = "" + this.bonesCount;
         this.goldBones = document.createElement("gold-bones");
-        document.body.appendChild(this.goldBones);
+        this.header.appendChild(this.goldBones);
         this.goldBonesCount = 0;
         this.goldBones.innerHTML = "" + this.goldBonesCount;
         this.enemies = new Array();

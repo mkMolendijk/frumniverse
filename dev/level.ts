@@ -9,6 +9,7 @@
  */
 class Level {
     
+    public header: HTMLElement;
     public div: HTMLElement;
     public scoreDiv: HTMLElement;
     public goldBones: HTMLElement;
@@ -28,13 +29,16 @@ class Level {
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
 
+        this.header = document.createElement("header");
+        document.body.appendChild(this.header);
+
         this.scoreDiv = document.createElement("bones");
-        document.body.appendChild(this.scoreDiv);
+        this.header.appendChild(this.scoreDiv);
         this.bonesCount = 0;
         this.scoreDiv.innerHTML = "" + this.bonesCount;
 
         this.goldBones = document.createElement("gold-bones");
-        document.body.appendChild(this.goldBones);
+        this.header.appendChild(this.goldBones);
         this.goldBonesCount = 0;
         this.goldBones.innerHTML = "" + this.goldBonesCount;
 
