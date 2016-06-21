@@ -93,6 +93,20 @@ platform31 {
     background-size: 100%;
 }
 
+platform4 {
+    width: 217px;
+    height: 182px;
+    background: url("../images/L4-platform-1.png") no-repeat;
+    background-size: 100%;
+}
+
+platform41{
+    width: 467px;
+    height: 315px;
+    background: url("../images/L4-platform-2.png") no-repeat;
+    background-size: 100%;
+}
+
 platform5 {
     width: 505px;
     height: 195px;
@@ -164,10 +178,18 @@ level {
     padding-top: 40px;
 }
 
-#level5 enemy {
+#level4 enemy {
     background-image: url("../images/angry-ghost.png");
+    width: 169px;
+    height: 221px;
+    text-align: center;
+
+}
+
+#level5 enemy {
+    background-image: url("../images/flame.png");
     width: 280px;
     height: 350px;
     text-align: center;
-    
+
 }
