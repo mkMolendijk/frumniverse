@@ -3,8 +3,8 @@
  */
 class LevelFive extends Level{
     private timer: number;
-    private hill: Platform;
-    private house: Platform;
+    private rock: Platform;
+    private castle: Platform;
 
     constructor() {
         super(5);
@@ -12,30 +12,30 @@ class LevelFive extends Level{
         this.enemyNames = ["aardbei", "bananen", "cijfers", "dwergje", "egeltje", "frisbee", "griezel", "hoepels", "ijsbeer", "januari", "kristal", "lerares", "musical", "neefjes",
             "oceanen", "plezier", "rappers", "rondjes", "snoepen", "toeters", "uitgang", "voetbal", "website", "yoghurt", "zwemmen"];
         
-        this.platform = new Platform(this, 2);
-        this.platform.width = 1129;
-        this.platform.height = 48;
+        this.platform = new Platform(this, 5);
+        this.platform.width = 505;
+        this.platform.height = 195;
         this.platform.posX = (window.innerWidth - this.platform.width) / 2;
         this.platform.posY = (window.innerHeight - (this.platform.height + 100));
         this.enemySize = 4;
 
         this.platform.draw();
 
-        this.hill = new Platform(this, 21);
-        this.hill.width = 554;
-        this.hill.height = 164;
-        this.hill.posX = this.platform.posX + 575;
-        this.hill.posY = this.platform.posY - this.hill.height;
+        this.rock = new Platform(this, 51);
+        this.rock.width = 422;
+        this.rock.height = 195;
+        this.rock.posX = this.platform.posX + 575;
+        this.rock.posY = this.platform.posY - this.rock.height;
 
-        this.hill.draw();
+        this.rock.draw();
 
-        this.house = new Platform(this, 22);
-        this.house.width = 166;
-        this.house.height = 142;
-        this.house.posX = this.hill.posX + 85;
-        this.house.posY = this.hill.posY - this.house.height;
+        this.castle = new Platform(this, 52);
+        this.castle.width = 136;
+        this.castle.height = 142;
+        this.castle.posX = this.rock.posX + 85;
+        this.castle.posY = this.rock.posY - this.castle.height;
 
-        this.house.draw();
+        this.castle.draw();
 
         this.dog = new Dog(this, this.platform);
 
@@ -43,7 +43,7 @@ class LevelFive extends Level{
     }
 
     private createEnemy() : void{
-        this.enemies.push(new Enemy(this, 210, 157));
+        this.enemies.push(new Enemy(this, 280, 350));
     }
 
     public remove() {
