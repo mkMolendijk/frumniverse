@@ -28,6 +28,11 @@ class LevelOne extends Level {
     }
 
     private createEnemy() : void{
-        this.enemies.push(new Enemy(this));
+        this.enemies.push(new Enemy(this, 128, 99));
+    }
+
+    public remove() {
+        clearInterval(this.timer);
+        super.remove();
     }
 }

@@ -24,24 +24,29 @@ var Platform = (function () {
 }());
 var Enemy = (function (_super) {
     __extends(Enemy, _super);
-    function Enemy(l) {
+    function Enemy(l, w, h) {
         _super.call(this, l, "enemy");
         var random = Math.round(Math.random() * 24);
         this.name = l.enemyNames[random];
         this.div.innerHTML = this.name;
-        this.width = 128;
-        this.height = 99;
+        this.width = w;
+        this.height = h;
         this.posX = -this.width;
         this.posY = (Math.random() * (window.innerHeight / 2 - this.height)) + 50;
         this.speed = Math.round(Math.random() * 3 + 1);
     }
-    Enemy.prototype.remove = function () {
+    Enemy.prototype.remove = function (index) {
+        this.level.enemies.splice(index, 1);
         this.div.remove();
     };
     Enemy.prototype.draw = function () {
         this.posX += this.speed;
         if (this.posX > window.innerWidth) {
-            this.div.remove();
+            var i = this.level.enemies.indexOf(this);
+            this.remove(i);
+            if (this.level.bonesCount > 0) {
+                this.level.bonesCount--;
+            }
         }
         this.div.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
     };
@@ -54,14 +59,14 @@ var Level = (function () {
         this.div.id = "level" + stage;
         document.body.appendChild(this.div);
         this.header = document.createElement("header");
-        document.body.appendChild(this.header);
+        this.div.appendChild(this.header);
         this.scoreDiv = document.createElement("bones");
         this.header.appendChild(this.scoreDiv);
         this.bonesCount = 0;
         this.scoreDiv.innerHTML = "" + this.bonesCount;
         this.goldBones = document.createElement("gold-bones");
         this.header.appendChild(this.goldBones);
-        this.goldBonesCount = 0;
+        this.goldBonesCount = stage - 1;
         this.goldBones.innerHTML = "" + this.goldBonesCount;
         this.enemies = new Array();
         window.addEventListener("keydown", this.onKeyDown.bind(this));
@@ -153,8 +158,7 @@ var Level = (function () {
             for (var i = 0; i < this.enemies.length; i++) {
                 if (this.lettersTyped == this.enemies[i].name) {
                     this.bonesCount++;
-                    this.scoreDiv.innerHTML = "" + this.bonesCount;
-                    this.enemies[i].remove();
+                    this.enemies[i].remove(i);
                     if (this.bonesCount == 10) {
                         this.goldBonesCount++;
                     }
@@ -169,6 +173,11 @@ var Level = (function () {
             this.enemies[i].draw();
         }
         this.checkEnemies();
+        this.scoreDiv.innerHTML = "" + this.bonesCount;
+        this.goldBones.innerHTML = "" + this.goldBonesCount;
+    };
+    Level.prototype.remove = function () {
+        this.div.remove();
     };
     return Level;
 }());
@@ -240,7 +249,11 @@ var LevelOne = (function (_super) {
         this.timer = setInterval(this.createEnemy.bind(this), 2000);
     }
     LevelOne.prototype.createEnemy = function () {
-        this.enemies.push(new Enemy(this));
+        this.enemies.push(new Enemy(this, 128, 99));
+    };
+    LevelOne.prototype.remove = function () {
+        clearInterval(this.timer);
+        _super.prototype.remove.call(this);
     };
     return LevelOne;
 }(Level));
@@ -251,7 +264,28 @@ var Game = (function () {
     }
     Game.prototype.gameLoop = function () {
         this.level.update();
+        this.nextLevel();
         requestAnimationFrame(this.gameLoop.bind(this));
+    };
+    Game.prototype.nextLevel = function () {
+        switch (this.level.bonesCount + this.level.goldBonesCount) {
+            case 11:
+                this.level.remove();
+                this.level = new LevelTwo();
+                break;
+            case 12:
+                this.level.remove();
+                this.level = new LevelThree();
+                break;
+            case 13:
+                this.level.remove();
+                this.level = new LevelFour();
+                break;
+            case 14:
+                this.level.remove();
+                this.level = new LevelFive();
+                break;
+        }
     };
     return Game;
 }());
@@ -331,30 +365,66 @@ window.addEventListener("load", function () {
 });
 var LevelFive = (function (_super) {
     __extends(LevelFive, _super);
-    function LevelFive(stage) {
-        _super.call(this, stage);
+    function LevelFive() {
+        _super.call(this, 5);
     }
     return LevelFive;
 }(Level));
 var LevelFour = (function (_super) {
     __extends(LevelFour, _super);
-    function LevelFour(stage) {
-        _super.call(this, stage);
+    function LevelFour() {
+        _super.call(this, 4);
     }
     return LevelFour;
 }(Level));
 var LevelThree = (function (_super) {
     __extends(LevelThree, _super);
-    function LevelThree(stage) {
-        _super.call(this, stage);
+    function LevelThree() {
+        _super.call(this, 3);
     }
     return LevelThree;
 }(Level));
 var LevelTwo = (function (_super) {
     __extends(LevelTwo, _super);
-    function LevelTwo(stage) {
-        _super.call(this, stage);
+    function LevelTwo() {
+        _super.call(this, 2);
+        this.enemyNames = ["acht", "boor", "cent", "duif", "egel", "fles", "goud", "hond", "iets", "jurk", "kamp", "leuk", "melk", "noot",
+            "oost", "pech", "quiz", "raar", "snot", "tuin", "unie", "vlam", "wijs", "yoga", "zeur"];
+        this.platform = new Platform(this, 2);
+        this.platform.width = 1129;
+        this.platform.height = 48;
+        this.platform.posX = (window.innerWidth - this.platform.width) / 2;
+        this.platform.posY = (window.innerHeight - (this.platform.height + 100));
+        this.enemySize = 4;
+        this.platform.draw();
+        this.hill = new Platform(this, 21);
+        this.hill.width = 554;
+        this.hill.height = 164;
+        this.hill.posX = this.platform.posX + 575;
+        this.hill.posY = this.platform.posY - this.hill.height;
+        this.hill.draw();
+        this.house = new Platform(this, 22);
+        this.house.width = 166;
+        this.house.height = 142;
+        this.house.posX = this.hill.posX + 85;
+        this.house.posY = this.hill.posY - this.house.height;
+        this.house.draw();
+        this.tree = new Platform(this, 23);
+        this.tree.width = 181;
+        this.tree.height = 435;
+        this.tree.posX = this.platform.posX + 85;
+        this.tree.posY = this.platform.posY - this.tree.height;
+        this.tree.draw();
+        this.dog = new Dog(this, this.platform);
+        this.timer = setInterval(this.createEnemy.bind(this), 2000);
     }
+    LevelTwo.prototype.createEnemy = function () {
+        this.enemies.push(new Enemy(this, 210, 157));
+    };
+    LevelTwo.prototype.remove = function () {
+        clearInterval(this.timer);
+        _super.prototype.remove.call(this);
+    };
     return LevelTwo;
 }(Level));
 //# sourceMappingURL=main.js.map

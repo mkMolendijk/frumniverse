@@ -2,7 +2,7 @@
  * LevelFour
  */
 class LevelFour extends Level{
-    constructor(stage: number) {
-        super(stage);
+    constructor() {
+        super(4);
     }
 }

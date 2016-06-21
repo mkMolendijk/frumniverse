@@ -62,6 +62,30 @@ platform1 {
     background: url("../images/L1-sprite.png") no-repeat -2px -2px;
 }
 
+platform2 {
+    width: 1129px;
+    height: 48px;
+    background: url("../images/L2-platform.png") no-repeat;
+}
+
+platform21 {
+    width: 554px;
+    height: 164px;
+    background: url("../images/L2-hill.png") no-repeat;
+}
+
+platform22 {
+    width: 166px;
+    height: 142px;
+    background: url("../images/L2-house.png") no-repeat;
+}
+
+platform23 {
+    width: 181px;
+    height: 435px;
+    background: url("../images/L2-tree.png") no-repeat;
+}
+
 level {
     width: 100%;
     height: 100%;
@@ -97,5 +121,13 @@ level {
     width: 128px;
     height: 99px;
     text-align: center;
+}
+
+#level2 enemy {
+    background-image: url("../images/bird.png");
+    width: 210px;
+    height: 157px;
+    text-align: center;
+    padding-top: 80px;
 }
 

@@ -19,10 +19,10 @@ class Level {
     protected lettersTyped: string = "";
 
     public enemyNames: Array<string>;
-    protected enemies: Array<Enemy>;    
+    public enemies: Array<Enemy>;    
     protected enemySize: number;
-    protected bonesCount: number;
-    protected goldBonesCount: number;
+    public bonesCount: number;
+    public goldBonesCount: number;
     
     constructor(stage : number) {
         this.div = document.createElement("level");
@@ -30,7 +30,7 @@ class Level {
         document.body.appendChild(this.div);
 
         this.header = document.createElement("header");
-        document.body.appendChild(this.header);
+        this.div.appendChild(this.header);
 
         this.scoreDiv = document.createElement("bones");
         this.header.appendChild(this.scoreDiv);
@@ -39,7 +39,7 @@ class Level {
 
         this.goldBones = document.createElement("gold-bones");
         this.header.appendChild(this.goldBones);
-        this.goldBonesCount = 0;
+        this.goldBonesCount = stage - 1;
         this.goldBones.innerHTML = "" + this.goldBonesCount;
 
 
@@ -136,8 +136,7 @@ class Level {
             for (let i = 0; i < this.enemies.length; i++) {
                 if (this.lettersTyped == this.enemies[i].name) {
                     this.bonesCount++;
-                    this.scoreDiv.innerHTML = "" + this.bonesCount;
-                    this.enemies[i].remove();
+                    this.enemies[i].remove(i);
                     if (this.bonesCount == 10) {
                         this.goldBonesCount++;
                     }
@@ -156,5 +155,11 @@ class Level {
         }
 
         this.checkEnemies();
+        this.scoreDiv.innerHTML = "" + this.bonesCount;
+        this.goldBones.innerHTML = "" + this.goldBonesCount;
+    }
+
+    public remove() {
+        this.div.remove();
     }
 }
