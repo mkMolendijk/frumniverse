@@ -163,3 +163,11 @@ level {
     text-align: center;
     padding-top: 40px;
 }
+
+#level5 enemy {
+    background-image: url("../images/angry-ghost.png");
+    width: 280px;
+    height: 350px;
+    text-align: center;
+    
+}
