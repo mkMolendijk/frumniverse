@@ -12,17 +12,17 @@ class LevelFour extends Level{
             "oranje", "punten", "quotes", "reuzen", "schaap", "tempel", "uurtje", "vijver", "windje", "zinken", "zwaard"];
         
         this.platform = new Platform(this, 4);
-        this.platform.width = 1129;
-        this.platform.height = 48;
+        this.platform.width = 217;
+        this.platform.height = 182;
         this.platform.posX = (window.innerWidth - this.platform.width) / 2;
         this.platform.posY = (window.innerHeight - (this.platform.height + 100));
-        this.enemySize = 4;
+        this.enemySize = 6;
 
         this.platform.draw();
 
-        this.rock = new Platform(this, 21);
-        this.rock.width = 554;
-        this.rock.height = 164;
+        this.rock = new Platform(this, 42);
+        this.rock.width = 467;
+        this.rock.height = 315;
         this.rock.posX = this.platform.posX + 575;
         this.rock.posY = this.platform.posY - this.rock.height;
 

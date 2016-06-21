@@ -9,7 +9,7 @@ class Game {
     private level : Level;
     
     constructor() {
-        this.level = new LevelOne();
+        this.level = new LevelFive();
         
         requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -22,23 +22,20 @@ class Game {
     }
 
     private nextLevel() {
-        switch(this.level.bonesCount + this.level.goldBonesCount) {
-            case 11:
+        if (this.level.bonesCount == 10) {
+            if (this.level.goldBonesCount == 1) {
                 this.level.remove();
                 this.level = new LevelTwo();
-                break;
-            case 12:
+            } else if (this.level.goldBonesCount == 2) {
                 this.level.remove();
                 this.level = new LevelThree();
-                break;
-            case 13:
+            } else if (this.level.goldBonesCount == 3) {
                 this.level.remove();
                 this.level = new LevelFour();
-                break;
-            case 14:
+            } else if (this.level.goldBonesCount == 4) {
                 this.level.remove();
                 this.level = new LevelFive();
-                break;
+            }
         }
     }
 }

@@ -259,7 +259,7 @@ var LevelOne = (function (_super) {
 }(Level));
 var Game = (function () {
     function Game() {
-        this.level = new LevelOne();
+        this.level = new LevelFive();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
     Game.prototype.gameLoop = function () {
@@ -268,23 +268,23 @@ var Game = (function () {
         requestAnimationFrame(this.gameLoop.bind(this));
     };
     Game.prototype.nextLevel = function () {
-        switch (this.level.bonesCount + this.level.goldBonesCount) {
-            case 11:
+        if (this.level.bonesCount == 10) {
+            if (this.level.goldBonesCount == 1) {
                 this.level.remove();
                 this.level = new LevelTwo();
-                break;
-            case 12:
+            }
+            else if (this.level.goldBonesCount == 2) {
                 this.level.remove();
                 this.level = new LevelThree();
-                break;
-            case 13:
+            }
+            else if (this.level.goldBonesCount == 3) {
                 this.level.remove();
                 this.level = new LevelFour();
-                break;
-            case 14:
+            }
+            else if (this.level.goldBonesCount == 4) {
                 this.level.remove();
                 this.level = new LevelFive();
-                break;
+            }
         }
     };
     return Game;
@@ -374,19 +374,19 @@ var LevelFive = (function (_super) {
         this.platform.height = 195;
         this.platform.posX = (window.innerWidth - this.platform.width) / 2;
         this.platform.posY = (window.innerHeight - (this.platform.height + 100));
-        this.enemySize = 4;
+        this.enemySize = 7;
         this.platform.draw();
         this.rock = new Platform(this, 51);
         this.rock.width = 422;
         this.rock.height = 195;
-        this.rock.posX = this.platform.posX + 575;
+        this.rock.posX = this.platform.posX + this.platform.width / 2 - this.rock.width / 2;
         this.rock.posY = this.platform.posY - this.rock.height;
         this.rock.draw();
         this.castle = new Platform(this, 52);
-        this.castle.width = 136;
-        this.castle.height = 142;
-        this.castle.posX = this.rock.posX + 85;
-        this.castle.posY = this.rock.posY - this.castle.height;
+        this.castle.width = 68;
+        this.castle.height = 71;
+        this.castle.posX = this.rock.posX + this.rock.width / 2 - this.castle.width / 2;
+        this.castle.posY = this.platform.posY - this.castle.height;
         this.castle.draw();
         this.dog = new Dog(this, this.platform);
         this.timer = setInterval(this.createEnemy.bind(this), 2000);
@@ -407,15 +407,15 @@ var LevelFour = (function (_super) {
         this.enemyNames = ["ankers", "bessen", "cowboy", "douche", "ekster", "filmen", "gevaar", "heksen", "ijsjes", "jeetje", "keuken", "lusten", "mazzel", "najaar",
             "oranje", "punten", "quotes", "reuzen", "schaap", "tempel", "uurtje", "vijver", "windje", "zinken", "zwaard"];
         this.platform = new Platform(this, 4);
-        this.platform.width = 1129;
-        this.platform.height = 48;
+        this.platform.width = 217;
+        this.platform.height = 182;
         this.platform.posX = (window.innerWidth - this.platform.width) / 2;
         this.platform.posY = (window.innerHeight - (this.platform.height + 100));
-        this.enemySize = 4;
+        this.enemySize = 6;
         this.platform.draw();
-        this.rock = new Platform(this, 21);
-        this.rock.width = 554;
-        this.rock.height = 164;
+        this.rock = new Platform(this, 42);
+        this.rock.width = 467;
+        this.rock.height = 315;
         this.rock.posX = this.platform.posX + 575;
         this.rock.posY = this.platform.posY - this.rock.height;
         this.rock.draw();
