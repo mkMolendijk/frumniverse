@@ -13,6 +13,7 @@ class Level {
     public div: HTMLElement;
     public scoreDiv: HTMLElement;
     public goldBones: HTMLElement;
+    public lettersDiv: HTMLElement;
     public platform: any;
     protected dog: Dog;
 
@@ -31,6 +32,10 @@ class Level {
 
         this.header = document.createElement("header");
         this.div.appendChild(this.header);
+
+        this.lettersDiv = document.createElement("letters");
+        this.header.appendChild(this.lettersDiv);
+        this.lettersDiv.innerHTML = this.lettersTyped;
 
         this.scoreDiv = document.createElement("bones");
         this.header.appendChild(this.scoreDiv);
@@ -129,6 +134,8 @@ class Level {
                 this.lettersTyped += 'z';
                 break;
         }
+
+        this.lettersDiv.innerHTML = this.lettersTyped;
     }
 
     public checkEnemies():void {
@@ -144,6 +151,7 @@ class Level {
             }
 
             this.lettersTyped = "";
+            this.lettersDiv.innerHTML = this.lettersTyped;
         }
     }
 

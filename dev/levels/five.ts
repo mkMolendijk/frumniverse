@@ -43,7 +43,7 @@ class LevelFive extends Level{
     }
 
     private createEnemy() : void{
-        this.enemies.push(new Enemy(this, 280, 350));
+        this.enemies.push(new Enemy(this, 144, 175));
     }
 
     public remove() {

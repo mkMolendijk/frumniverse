@@ -1,7 +1,6 @@
 /// <reference path="level.ts" />
 /// <reference path="levels/one.ts" />
 
-
 /**
  * Game
  */
@@ -9,7 +8,7 @@ class Game {
     private level : Level;
     
     constructor() {
-        this.level = new LevelFive();
+        this.level = new LevelOne();
         
         requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -35,6 +34,9 @@ class Game {
             } else if (this.level.goldBonesCount == 4) {
                 this.level.remove();
                 this.level = new LevelFive();
+            } else {
+                this.level.remove();
+                this.level = new LevelOne();
             }
         }
     }

@@ -60,6 +60,9 @@ var Level = (function () {
         document.body.appendChild(this.div);
         this.header = document.createElement("header");
         this.div.appendChild(this.header);
+        this.lettersDiv = document.createElement("letters");
+        this.header.appendChild(this.lettersDiv);
+        this.lettersDiv.innerHTML = this.lettersTyped;
         this.scoreDiv = document.createElement("bones");
         this.header.appendChild(this.scoreDiv);
         this.bonesCount = 0;
@@ -152,6 +155,7 @@ var Level = (function () {
                 this.lettersTyped += 'z';
                 break;
         }
+        this.lettersDiv.innerHTML = this.lettersTyped;
     };
     Level.prototype.checkEnemies = function () {
         if (this.lettersTyped.length == this.enemySize) {
@@ -165,6 +169,7 @@ var Level = (function () {
                 }
             }
             this.lettersTyped = "";
+            this.lettersDiv.innerHTML = this.lettersTyped;
         }
     };
     Level.prototype.update = function () {
@@ -259,7 +264,7 @@ var LevelOne = (function (_super) {
 }(Level));
 var Game = (function () {
     function Game() {
-        this.level = new LevelFive();
+        this.level = new LevelOne();
         requestAnimationFrame(this.gameLoop.bind(this));
     }
     Game.prototype.gameLoop = function () {
@@ -285,80 +290,13 @@ var Game = (function () {
                 this.level.remove();
                 this.level = new LevelFive();
             }
+            else {
+                this.level.remove();
+                this.level = new LevelOne();
+            }
         }
     };
     return Game;
-}());
-var Ghost = (function (_super) {
-    __extends(Ghost, _super);
-    function Ghost(l) {
-        _super.call(this, l, "ghost");
-        this.speedX = 0;
-        this.speedY = 0;
-        this.posX = Math.random() * (window.innerWidth - 100);
-        this.posY = Math.random() * (window.innerHeight - 100);
-        window.addEventListener("keydown", this.onKeyDown.bind(this));
-        window.addEventListener("keyup", this.onKeyUp.bind(this));
-    }
-    Ghost.prototype.onKeyDown = function (event) {
-        switch (event.keyCode) {
-            case 37:
-                this.speedX = -5;
-                break;
-            case 38:
-                this.speedY = -5;
-                break;
-            case 39:
-                this.speedX = 5;
-                break;
-            case 40:
-                this.speedY = 5;
-                break;
-        }
-    };
-    Ghost.prototype.onKeyUp = function (event) {
-        switch (event.keyCode) {
-            case 37:
-                this.speedX = 0;
-                break;
-            case 38:
-                this.speedY = 0;
-                break;
-            case 39:
-                this.speedX = 0;
-                break;
-            case 40:
-                this.speedY = 0;
-                break;
-        }
-    };
-    Ghost.prototype.move = function () {
-        if (this.posX + this.speedX < 0) {
-            this.posX = 0;
-        }
-        else if (this.posX + this.speedX > window.innerWidth - 100) {
-            this.posX = window.innerWidth - 100;
-        }
-        else {
-            this.posX += this.speedX;
-        }
-        if (this.posY + this.speedY < 0) {
-            this.posY = 0;
-        }
-        else if (this.posY + this.speedY > window.innerHeight - 100) {
-            this.posY = window.innerHeight - 100;
-        }
-        else {
-            this.posY += this.speedY;
-        }
-        this.divGhost.style.transform = "translate(" + this.posX + "px, " + this.posY + "px)";
-    };
-    return Ghost;
-}(Character));
-var Item = (function () {
-    function Item() {
-    }
-    return Item;
 }());
 window.addEventListener("load", function () {
     new Game();
@@ -392,7 +330,7 @@ var LevelFive = (function (_super) {
         this.timer = setInterval(this.createEnemy.bind(this), 2000);
     }
     LevelFive.prototype.createEnemy = function () {
-        this.enemies.push(new Enemy(this, 280, 350));
+        this.enemies.push(new Enemy(this, 144, 175));
     };
     LevelFive.prototype.remove = function () {
         clearInterval(this.timer);
